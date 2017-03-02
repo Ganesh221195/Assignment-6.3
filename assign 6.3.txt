@@ -1,0 +1,68 @@
+Explain the working of below pig script commands with an example:
+1. LOAD - loads data from file system
+          ex: relate = load 'sample.txt' using PigStorage(',');  
+
+2. STORE - stores or saves results to file system
+           ex: Store sam.txt into 'out1' using PigStorage('#");
+
+3. DUMP - displays results to screen
+           ex: dump relate;
+
+4. FOREACH - Generates data transformations based on columns of data
+             ex: Xz = FOREACH A GENERATE f1;
+
+5. FILTER - Selects tuples from a relation based on some condition
+            ex: A = LOAD 'data' AS (f1:int,f2:int,f3:int);
+ 			DUMP A;
+ 			(1,2,3)
+			(4,2,1)
+			(8,3,4)
+			(4,3,3)
+			(7,2,5)
+			(8,4,3)
+
+			X = FILTER A BY f3 == 3;
+
+ 			DUMP X;
+ 			(1,2,3)
+ 			(4,3,3)
+ 			(8,4,3)
+
+6. GROUP BY - Groups the data in one or multiple relations
+              ex: DUMP A;
+		(John,18,4.0F)
+		(Mary,19,3.8F)
+		(Bill,20,3.9F)
+		(Joe,18,3.8F)
+
+		B = GROUP A BY age;
+
+		DUMP B;
+		(18,{(John,18,4.0F),(Joe,18,3.8F)})
+		(19,{(Mary,19,3.8F)})
+		(20,{(Bill,20,3.9F)})
+
+7. ORDER BY - Sorts a relation based on one or more fields
+            ex: A = LOAD 'data' AS (a1:int,a2:int,a3:int);
+		DUMP A;
+		(1,2,3)
+		(4,2,1)
+		(8,3,4)
+		(4,3,3)
+		(7,2,5)
+		(8,4,3)
+
+		X = ORDER A BY a3 DESC;
+		DUMP X;
+		(7,2,5)
+		(8,3,4)
+		(1,2,3)
+		(4,3,3)
+		(8,4,3)
+		(4,2,1)
+
+
+8. DESCRIBE - Returns the schema of an alias
+              ex:  A = load 'student' AS (name:chararray,age:int,gpa:float);
+                   DESCRIBE A;
+                   A: {name: chararray,age: int,gpa: float}
